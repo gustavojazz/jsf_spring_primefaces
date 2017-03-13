@@ -10,22 +10,39 @@
 </h:head>
 <h:body>
 	<t:saveState value="#{usuarioBean.usuario}" />
-	<h:form>			
-		<h:panelGrid columns="2">
-		
-			<h:outputLabel value="Nome" for="nome"/>
-			<h:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
-		
-			<h:outputLabel value="Login" for="login"/>
-			<h:inputText id="login" value="#{usuarioBean.usuario.login}" readonly="true" />
-		
-			<h:outputLabel value="Senha" for="senha"/>
-			<h:inputText id="senha" value="#{usuarioBean.usuario.senha}" />
-		
-			<h:commandLink value="Voltar" action="lista" />
-			<h:commandButton value="Salvar" action="#{usuarioBean.alterar}" />
-		
-		</h:panelGrid>	
-	</h:form>
+	
+	<div id="cabecalho">
+		<ul id="menu-principal">
+			<li><h:link value="Usuário" outcome="/pages/usuario/lista" /></li>
+		</ul>
+	</div>
+
+	<div id="conteudo">
+		<div id="container">
+			<h1>Edição de Usuário</h1>
+			<h:form>
+				<h:outputLabel value="Nome" for="nome" />
+				<h:inputText id="nome" value="#{usuarioBean.usuario.nome}" styleClass="texto-longo" />
+
+				<h:outputLabel value="Login" for="login" />
+				<h:inputText id="login" value="#{usuarioBean.usuario.login}" 	readonly="true" />
+
+				<h:outputLabel value="Senha" for="senha" />
+				<h:inputText id="senha" value="#{usuarioBean.usuario.senha}" />
+
+				<div class="acoes-principais">
+					<h:commandLink value="Voltar" action="lista" />
+					<h:commandButton value="Salvar" action="#{usuarioBean.alterar}" />
+				</div>
+			</h:form>
+		</div>
+	</div>
+
+	<div id="rodape">
+		<div class="rodape-bar">
+			<strong>Bug Tracker</strong> - Controle de bugs | TriadWorks
+		</div>
+	</div>
+	
 </h:body>
 </html>

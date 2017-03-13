@@ -9,33 +9,59 @@
 	<h:outputStylesheet library="css" name="app.css" />
 </h:head>
 <h:body>
-	<t:saveState value="#{usuarioBean.usuarios}" />
-	<h:form>
-		<h:commandLink value="Novo" action="novo" />
-		&#160;
-		<h:commandButton value="Listar" action="#{usuarioBean.lista}" />
-		<h:dataTable value="#{usuarioBean.usuarios}" var="usuario">
-			<h:column>
-				<f:facet name="header">ID</f:facet>
-				#{usuario.id}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-				#{usuario.nome}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Login</f:facet>
-				#{usuario.login}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Ações</f:facet>
-				<h:commandLink value="Remover" action="#{usuarioBean.remove(usuario)}" />
-				&#160;
-				<h:commandLink value="Alterar" action="edita">
-					<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}" />
-				</h:commandLink>
-			</h:column>
-		</h:dataTable>
-	</h:form>
+	
+	<div id="cabecalho">
+		<ul id="menu-principal">
+			<li><h:link value="Usuário" outcome="/pages/usuario/lista" /></li>
+		</ul>
+	</div>
+
+	<div id="conteudo">
+		<div id="container">
+			<t:saveState value="#{usuarioBean.usuarios}" />
+			<h1>Listagem de Usuários</h1>
+			<h:form>				
+				<div class="acoes-principais">
+					<h:commandLink value="Novo" action="novo" />
+		        	&#160;
+		        	<h:commandButton value="Listar" action="#{usuarioBean.lista}" />
+				</div>
+				
+				<h:dataTable value="#{usuarioBean.usuarios}" var="usuario" styleClass="dados" rowClasses="impar,par">
+					
+					<h:column>
+						<f:facet name="header">ID</f:facet>
+						#{usuario.id}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						#{usuario.nome}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Login</f:facet>
+						#{usuario.login}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Ações</f:facet>
+						<h:commandLink value="Remover" action="#{usuarioBean.remove(usuario)}" />
+						&#160;
+						<h:commandLink value="Alterar" action="edita">
+						<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}" />
+						</h:commandLink>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</div>
+	</div>
+	
+	<div id="rodape">
+		<div class="rodape-bar">
+			<strong>Bug Tracker</strong> - Controle de bugs | TriadWorks
+		</div>	
+	</div>
+
 </h:body>
 </html>

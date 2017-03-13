@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+<h:head>
+	<title>Sistema de Controle de Bug - Bug Tracker</title>
+	<h:outputStylesheet library="css" name="app.css" />
+</h:head>
+<h:body>
+	<t:saveState value="#{usuarioBean.usuarios}" />
+	<h:form>
+		<h:commandLink value="Novo" action="novo" />
+		&#160;
+		<h:commandButton value="Listar" action="#{usuarioBean.lista}" />
+		<h:dataTable value="#{usuarioBean.usuarios}" var="usuario">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				#{usuario.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				#{usuario.nome}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Login</f:facet>
+				#{usuario.login}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ações</f:facet>
+				<h:commandLink value="Remover" action="#{usuarioBean.remove(usuario)}" />
+				&#160;
+				<h:commandLink value="Alterar" action="edita">
+					<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}" />
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>

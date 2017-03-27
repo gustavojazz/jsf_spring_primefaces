@@ -5,63 +5,69 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:t="http://myfaces.apache.org/tomahawk">
 <h:head>
-	<title>Sistema de Controle de Bug - Bug Tracker</title>
-	<h:outputStylesheet library="css" name="app.css" />
+<title>Sistema de Controle de Bug - Bug Tracker</title>
+<h:outputStylesheet library="css" name="app.css" />
 </h:head>
 <h:body>
-	
+
+	<!-- Cabeçalho -->
 	<div id="cabecalho">
 		<ul id="menu-principal">
-			<li><h:link value="Usuário" outcome="/pages/usuario/lista" /></li>
+			<li>
+				<h:link value="Usuário" outcome="/pages/usuario/lista" />
+			</li>
 		</ul>
 	</div>
-
+	
+	<h:messages id="mensagens" errorClass="errors" infoClass="notice" />
+	
+	<!-- Corpo -->
 	<div id="conteudo">
 		<div id="container">
 			<t:saveState value="#{usuarioBean.usuarios}" />
 			<h1>Listagem de Usuários</h1>
-			<h:form>				
+			<h:form>
 				<div class="acoes-principais">
-					<h:commandLink value="Novo" action="novo" />
-		        	&#160;
-		        	<h:commandButton value="Listar" action="#{usuarioBean.lista}" />
+					<h:commandLink value="Novo" action="novo"/>
+					&#160;
+					<h:commandButton value="Listar" action="#{usuarioBean.lista}" />
 				</div>
-				
-				<h:dataTable value="#{usuarioBean.usuarios}" var="usuario" styleClass="dados" rowClasses="impar,par">
-					
+				<h:dataTable value="#{usuarioBean.usuarios}" var="usuario" styleClass="dados" rowClasses="par,impar" >
 					<h:column>
 						<f:facet name="header">ID</f:facet>
 						#{usuario.id}
 					</h:column>
-					
 					<h:column>
 						<f:facet name="header">Nome</f:facet>
 						#{usuario.nome}
-					</h:column>
-					
+					</h:column>	
 					<h:column>
 						<f:facet name="header">Login</f:facet>
 						#{usuario.login}
 					</h:column>
-					
 					<h:column>
 						<f:facet name="header">Ações</f:facet>
-						<h:commandLink value="Remover" action="#{usuarioBean.remove(usuario)}" />
-						&#160;
-						<h:commandLink value="Alterar" action="edita">
-						<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}" />
-						</h:commandLink>
-					</h:column>
+						<div class="acoes-principais">
+							<h:commandLink value="Remover" action="#{usuarioBean.remove(usuario)}" >
+								<f:ajax render="@form :mensagens"/>
+							</h:commandLink>
+							&#160;
+							<h:commandLink value="Alterar" action="edita">
+								<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}"/>
+							</h:commandLink>
+						</div>										
+					</h:column>			
 				</h:dataTable>
 			</h:form>
 		</div>
 	</div>
 	
+	<!-- Rodapé -->
 	<div id="rodape">
 		<div class="rodape-bar">
-			<strong>Bug Tracker</strong> - Controle de bugs | TriadWorks
-		</div>	
+			<strong>Bug Tracker</strong> - Controle de Bugs | TriadWorks
+		</div>
 	</div>
-
+	
 </h:body>
 </html>
